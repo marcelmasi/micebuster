@@ -1,0 +1,10 @@
+name: micebuster
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - numpy
+      - pyaudio
+      - sounddevice
+      - argparse
+      - scipy
