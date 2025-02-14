@@ -1,5 +1,6 @@
 # Micebuster
-To get rid of mice and rats without killing them.
+<div style="text-align:center"><img src="mouse.png" alt="Mouse leaving the house"/><br />
+To get rid of mice and rats without killing them.</div>
 
 ## Background
 Mice ant rats can hear ultrasound (e.g. sound above a frequency of 20000Hz), but humans
