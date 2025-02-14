@@ -76,13 +76,17 @@ def main():
     args = parser.parse_args()
 
     all_wave_data: Optional[np.ndarray] = None
+    random_frequencies: list[int] = []
 
     # Generate sine wave
     for i in range(args.number):
         random_frequency = random.randint(args.low, args.high)
         one_frequency_wave = generate_sine_wave(frequency=random_frequency, duration=float(args.duration))
+        random_frequencies.append(random_frequency)
         all_wave_data = \
             np.concatenate([all_wave_data, one_frequency_wave]) if all_wave_data is not None else one_frequency_wave
+
+    print(f"Created random frequencies: {random_frequencies}")
 
     if args.save:
         write_wave_to_file(wave=all_wave_data, file_name=args.save)
