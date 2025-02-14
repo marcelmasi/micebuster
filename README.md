@@ -13,7 +13,7 @@ should be varied.
 This simple Python script is designed exactly for that: randomly pitched sound at high frequencies.
 
 ## Warning
-**Never use this near dogs, cats or any other pets. Also, there is research showing ultrasound
+**Never use this near dogs, cats or any other pets or farm animals. Also, there is research showing ultrasound
 frequencies might sometimes still be sensed by humans or could cause headaches.**
 
 **Never use too loud sounds, especially in the frequencies of the human ear (note that younger people can hear higher 
@@ -50,4 +50,7 @@ Note that this file will not work on most speakers, since the frequencies are to
 
 This is an example for speakers that do go up to 20kHz: [example_15kHz_to_20kHz.wav](example_15kHz_to_20kHz.wav)
 
-** The above also holds for these files: never play them when other animals or people are around.**
+**The above also holds for these files: never play them when other animals or people are around.**
+
+## Copyright and License
+See [LICENSE](LICENSE)
