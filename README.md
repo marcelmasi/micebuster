@@ -4,8 +4,8 @@ To get rid of mice and rats without killing them.</div>
 
 ## Background
 Mice ant rats can hear ultrasound (e.g. sound above a frequency of 20000Hz), but humans can not. Apparently, mice and
-rats do not like it if you play sound between 22kHz and 35hHz. So you actually can use audio to get rid of them. If
-you use this over days or weeks, they will simply go away and find another place to live.
+rats do not like it if you play sound between 22kHz and 35hHz. So you can use audio to get rid of them. If
+you use this repeatedly, they will simply go away and find another place to live.
 
 However, since mice may become accustomed to a single frequency over time, the frequency
 should be varied.
@@ -46,5 +46,8 @@ range between low and high define the frequency range for the uniformly generate
 ## Example File
 There is an example file in the repository: [example_22kHz_to_35kHz.wav](example_22kHz_to_35kHz.wav)
 
-Note that this file will not work on most speakers, since the frequencies are too high. E.g. the HomePod Mini does
-not produce sound in these frequencies.
+Note that this file will not work on most speakers, since the frequencies are too high.
+
+This is an example for speakers that do go up to 20kHz: [example_15kHz_to_20kHz.wav](example_15kHz_to_20kHz.wav)
+
+** The above also holds for these files: never play them when other animals or people are around.**
