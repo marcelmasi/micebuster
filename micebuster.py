@@ -18,8 +18,9 @@ def generate_sine_wave(frequency, duration, sample_rate=44100) -> np.ndarray:
     Returns:
         A numpy array containing the sine wave.
     """
-    t = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
-    wave = 0.5 * np.sin(2 * np.pi * frequency * t)
+    t = np.linspace(start=0, stop=duration, num=int(sample_rate * duration), endpoint=False)
+    amplitude = np.iinfo(np.int16).max
+    wave = amplitude * np.sin(2 * np.pi * frequency * t)
     return wave
 
 
@@ -37,7 +38,7 @@ def play_wave(wave: np.ndarray, sample_rate=44100) -> None:
 
 def write_wave_to_file(wave: np.ndarray, file_name: str, sample_rate=44100) -> None:
     import scipy.io.wavfile
-    scipy.io.wavfile.write(file_name, sample_rate, wave)
+    scipy.io.wavfile.write(filename=file_name, rate=sample_rate, data=wave.astype(np.int16))
 
 
 def main():
