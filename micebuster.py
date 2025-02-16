@@ -6,7 +6,7 @@ import numpy as np
 import sounddevice as sd
 
 
-def generate_sine_wave(frequency, duration, sample_rate=44100) -> np.ndarray:
+def generate_sine_wave(frequency: int, duration: int, sample_rate: int) -> np.ndarray:
     """
     Generate a sine wave of a given frequency and duration.
 
@@ -21,10 +21,10 @@ def generate_sine_wave(frequency, duration, sample_rate=44100) -> np.ndarray:
     t = np.linspace(start=0, stop=duration, num=int(sample_rate * duration), endpoint=False)
     amplitude = np.iinfo(np.int16).max
     wave = amplitude * np.sin(2 * np.pi * frequency * t)
-    return wave
+    return wave.astype(np.int16)
 
 
-def play_wave(wave: np.ndarray, sample_rate=44100) -> None:
+def play_wave(wave: np.ndarray, sample_rate: int) -> None:
     """
     Play a given wave using sounddevice.
 
@@ -36,9 +36,18 @@ def play_wave(wave: np.ndarray, sample_rate=44100) -> None:
     sd.wait()  # Wait until the sound has finished playing
 
 
-def write_wave_to_file(wave: np.ndarray, file_name: str, sample_rate=44100) -> None:
+def write_wave_to_file(wave: np.ndarray, file_name: str, sample_rate: int) -> None:
+    """
+    Writes wave data into a WAV file.
+
+    Args:
+        wave        : ndarray of wave data. Note that the type defines also the type of the file, e.g. if it is np.int16
+                      then it will write a 16bit int file.
+        file_name   : Path and filename of the WAV file.
+        sample_rate : Sampling rate in Hertz, e.g. 192000, of the data and file.
+    """
     import scipy.io.wavfile
-    scipy.io.wavfile.write(filename=file_name, rate=sample_rate, data=wave.astype(np.int16))
+    scipy.io.wavfile.write(filename=file_name, rate=sample_rate, data=wave)
 
 
 def main():
@@ -74,6 +83,13 @@ def main():
         help="File name to write the audio instead of playing it. This will create a WAV file, so you should use the "
              ".wav extension."
     )
+    parser.add_argument(
+        "--rate",
+        type=int,
+        default=192000,
+        help="This is the sampling rate. Use high sampling rates (e.g. 192000) to capture the high frequencies. See "
+             "https://en.wikipedia.org/wiki/Nyquist–Shannon_sampling_theorem"
+    )
     args = parser.parse_args()
 
     all_wave_data: Optional[np.ndarray] = None
@@ -82,7 +98,11 @@ def main():
     # Generate sine wave
     for i in range(args.number):
         random_frequency = random.randint(args.low, args.high)
-        one_frequency_wave = generate_sine_wave(frequency=random_frequency, duration=float(args.duration))
+        one_frequency_wave = generate_sine_wave(
+            frequency=random_frequency,
+            duration=args.duration,
+            sample_rate=args.rate,
+        )
         random_frequencies.append(random_frequency)
         all_wave_data = \
             np.concatenate([all_wave_data, one_frequency_wave]) if all_wave_data is not None else one_frequency_wave
@@ -90,9 +110,9 @@ def main():
     print(f"Created random frequencies: {random_frequencies}")
 
     if args.save:
-        write_wave_to_file(wave=all_wave_data, file_name=args.save)
+        write_wave_to_file(wave=all_wave_data, file_name=args.save, sample_rate=args.rate)
     else:
-        play_wave(all_wave_data)
+        play_wave(all_wave_data, sample_rate=args.rate)
 
 
 if __name__ == "__main__":
